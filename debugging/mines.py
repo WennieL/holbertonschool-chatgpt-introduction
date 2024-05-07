@@ -54,9 +54,9 @@ class Minesweeper:
         return True
 
     def is_win(self):
-        total_cells = self.width * self.height
+        total_non_mine_cells = self.width * self.height - len(self.mines)
         revealed_count = sum(sum(row) for row in self.revealed)
-        return total_cells - revealed_count == len(self.mines)
+        return total_non_mine_cells == revealed_count
 
     def play(self):
         while True:
@@ -70,7 +70,7 @@ class Minesweeper:
                     break
                 if self.is_win():
                     self.print_board(reveal=True)
-                    print("Congratulations! You have cleared all non-mine cells.")
+                    print("Congratulations! You've won the game.")
                     break
             except ValueError:
                 print("Invalid input. Please enter numbers only.")
